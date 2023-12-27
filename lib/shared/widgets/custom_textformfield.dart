@@ -33,29 +33,29 @@ class CustomTextFormField extends StatelessWidget {
 
   CustomTextFormField(
       {Key? key,
-        this.textInputType,
-        this.prefixIcon,
-        this.suffixIcon,
-        this.autovalidateMode,
-        this.maxLines = 1,
-        this.label = '',
-        this.icon,
-        this.labelColor,
-        this.fillingColor = AppColors.grey,
-        this.hintText = '',
-        this.obscureText,
-        this.controller,
-        this.validator,
-        this.onSaved,
-        this.onTap,
-        this.autofocus = false,
-        this.isEnabled = true,
-        this.keyboardType,
-        this.inputFormatters,
-        this.labelText,
-        this.filled = true,
-        this.useUnderline = false,
-        this.suffix})
+      this.textInputType,
+      this.prefixIcon,
+      this.suffixIcon,
+      this.autovalidateMode,
+      this.maxLines = 1,
+      this.label = '',
+      this.icon,
+      this.labelColor,
+      this.fillingColor = AppColors.white,
+      this.hintText = '',
+      this.obscureText,
+      this.controller,
+      this.validator,
+      this.onSaved,
+      this.onTap,
+      this.autofocus = false,
+      this.isEnabled = true,
+      this.keyboardType,
+      this.inputFormatters,
+      this.labelText,
+      this.filled = true,
+      this.useUnderline = false,
+      this.suffix})
       : super(key: key);
 
   @override
@@ -66,20 +66,20 @@ class CustomTextFormField extends StatelessWidget {
         useUnderline == true
             ? const SizedBox.shrink()
             : Text(
-          label!,
-          style: TextStyle(
-              fontSize: 16.sp,
-              color: labelColor ?? AppColors.black2,
-              fontWeight: FontWeight.w400),
-        ),
+                label!,
+                style: TextStyle(
+                    fontSize: 14.sp,
+                    color: labelColor ?? AppColors.black2,
+                    fontWeight: FontWeight.w600),
+              ),
         useUnderline == true ? HSpace(0.h) : HSpace(8.h),
         TextFormField(
           // textAlign: useUnderline == true ? TextAlign.center : TextAlign.left,
           style: TextStyle(
               color: AppColors.blackText,
               letterSpacing: useUnderline == true ? 5.0 : 0.0,
-              fontSize: useUnderline == true ? 30.sp : 14.sp,
-              fontWeight: FontWeight.w400),
+              fontSize: useUnderline == true ? 30.sp : 16.sp,
+              fontWeight: FontWeight.w500),
           enabled: isEnabled,
           textCapitalization: TextCapitalization.sentences,
           autovalidateMode: autovalidateMode,
@@ -114,10 +114,13 @@ class CustomTextFormField extends StatelessWidget {
               color: AppColors.black,
             ),
             // errorStyle: const TextStyle(color: AppColors.red,),
-            errorStyle: TextStyle(color: AppColors.red, height: 0.2.h, ),
+            errorStyle: TextStyle(
+              color: AppColors.red,
+              height: 0.2.h,
+            ),
             contentPadding:
-            // EdgeInsets.only(top: 21.h, bottom: 21.h, left: 20.w),
-            EdgeInsets.only(top: 18.h, bottom: 18.h, left: 20.w),
+                // EdgeInsets.only(top: 21.h, bottom: 21.h, left: 20.w),
+                EdgeInsets.only(top: 18.h, bottom: 18.h, left: 20.w),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12.r),
               borderSide: BorderSide(
@@ -133,42 +136,41 @@ class CustomTextFormField extends StatelessWidget {
             hintText: hintText,
             hintStyle: TextStyle(
                 color: AppColors.hintTextColor,
-                fontSize: 16.sp,
+                fontSize: 14.sp,
                 fontWeight: FontWeight.w400),
             focusedBorder: useUnderline == true
                 ? const UnderlineInputBorder(
-                borderSide: BorderSide(color: Colors.black26))
+                    borderSide: BorderSide(color: Colors.black26))
                 : OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(12.r)),
-                borderSide: BorderSide(
-                    color: AppColors.primaryColor,
-                    width: 2.w,
-                    style: BorderStyle.solid)),
+                    borderRadius: BorderRadius.all(Radius.circular(12.r)),
+                    borderSide: BorderSide(
+                        color: AppColors.primaryColor,
+                        width: 2.w,
+                        style: BorderStyle.solid)),
             enabledBorder: useUnderline == true
                 ? const UnderlineInputBorder(
-                borderSide: BorderSide(color: Colors.black26))
+                    borderSide: BorderSide(color: Colors.black26))
                 : OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(12.r)),
-                borderSide: BorderSide(
-                    color: AppColors.borderGrey,
-                    width: 0.5.w,
-                    style: BorderStyle.solid)),
+                    borderRadius: BorderRadius.all(Radius.circular(12.r)),
+                    borderSide: BorderSide(
+                        color: AppColors.borderGrey,
+                        width: 0.5.w,
+                        style: BorderStyle.solid)),
             errorBorder: useUnderline == true
                 ? const UnderlineInputBorder(
-                borderSide: BorderSide(color: Colors.black26))
+                    borderSide: BorderSide(color: Colors.black26))
                 : OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(12.r)),
-                borderSide: BorderSide(
-                    color: AppColors.red,
-                    width: 0.5.w,
-                    style: BorderStyle.solid)),
+                    borderRadius: BorderRadius.all(Radius.circular(12.r)),
+                    borderSide: BorderSide(
+                        color: AppColors.red,
+                        width: 0.5.w,
+                        style: BorderStyle.solid)),
           ),
         ),
       ],
     );
   }
 }
-
 
 // class CustomTextFormField extends StatefulWidget {
 //   final Widget? prefixIcon;

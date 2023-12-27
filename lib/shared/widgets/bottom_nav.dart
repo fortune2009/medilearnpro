@@ -9,7 +9,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:medilearnpro/core/base/bottom_nav_model.dart';
 import 'package:medilearnpro/shared/utils/assets.dart';
 import 'package:medilearnpro/shared/utils/color.dart';
-import 'package:medilearnpro/shared/utils/styles.dart';
 import 'package:medilearnpro/shared/utils/utils.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -132,50 +131,39 @@ class _BottomNav extends State<BottomNav> with WidgetsBindingObserver {
 
   userBottomTabItems(BuildContext context) {
     return [
-      // BottomNavigationBarItem(
-      //   activeIcon: SvgPicture.asset(
-      //     SvgAssets.dashboardIcon,
-      //     color: AppColors.primaryColor,
-      //   ),
-      //   icon: SvgPicture.asset(
-      //     SvgAssets.dashboardIcon,
-      //     color: AppColors.primaryBgColor,
-      //   ),
-      //   label: "Dashboard",
-      // ),
-      // BottomNavigationBarItem(
-      //   activeIcon: SvgPicture.asset(
-      //     SvgAssets.accountIcon,
-      //     color: AppColors.primaryColor,
-      //   ),
-      //   icon: SvgPicture.asset(
-      //     SvgAssets.accountIcon,
-      //     color: AppColors.primaryBgColor,
-      //   ),
-      //   label: "Accounts",
-      // ),
-      // BottomNavigationBarItem(
-      //   activeIcon: SvgPicture.asset(
-      //     SvgAssets.consentIcon,
-      //     color: AppColors.primaryColor,
-      //   ),
-      //   icon: SvgPicture.asset(
-      //     SvgAssets.consentIcon,
-      //     color: AppColors.primaryBgColor,
-      //   ),
-      //   label: "Consent",
-      // ),
-      // BottomNavigationBarItem(
-      //   activeIcon: SvgPicture.asset(
-      //     SvgAssets.profileIcon,
-      //     color: AppColors.primaryColor,
-      //   ),
-      //   icon: SvgPicture.asset(
-      //     SvgAssets.profileIcon,
-      //     color: AppColors.primaryBgColor,
-      //   ),
-      //   label: "Me",
-      // ),
+      BottomNavigationBarItem(
+        activeIcon: SvgPicture.asset(
+          SvgAssets.home,
+          color: AppColors.primaryColor,
+        ),
+        icon: SvgPicture.asset(
+          SvgAssets.home1,
+          color: AppColors.primaryBgColor,
+        ),
+        label: "Home",
+      ),
+      BottomNavigationBarItem(
+        activeIcon: SvgPicture.asset(
+          SvgAssets.lesson,
+          color: AppColors.primaryColor,
+        ),
+        icon: SvgPicture.asset(
+          SvgAssets.lesson1,
+          color: AppColors.primaryBgColor,
+        ),
+        label: "Lessons",
+      ),
+      BottomNavigationBarItem(
+        activeIcon: SvgPicture.asset(
+          SvgAssets.profile,
+          color: AppColors.primaryColor,
+        ),
+        icon: SvgPicture.asset(
+          SvgAssets.profile1,
+          color: AppColors.primaryBgColor,
+        ),
+        label: "Profile",
+      ),
     ];
   }
 }

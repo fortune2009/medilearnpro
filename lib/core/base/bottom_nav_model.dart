@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:medilearnpro/modules/home/home.dart';
+import 'package:medilearnpro/modules/lessons/lessons.dart';
+import 'package:medilearnpro/modules/profile/profile.dart';
 
 class BottomNavModel extends ChangeNotifier {
   int _currentIndex = 0;
   int get currentIndex => _currentIndex;
 
   final List<Widget> _children = [
-    // const Homepage(),
-    // const LinkedAccounts(),
-    // const ManageConsent(selectedIndex: 0),
-    // const MyProfile()
+    const Home(),
+    const Lessons(),
+    const Profile(),
   ];
 
   List<Widget> get children => _children;

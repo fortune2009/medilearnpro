@@ -1,23 +1,24 @@
 class RoutePaths {
   static const String splash = '/';
   static const String splashOptions = '/splashOptions';
-  static const String newSignIn = '/newLogin';
-  static const String enterLoginPin = '/enterLoginPin';
-  static const String signIn = '/signIn';
   static const String setupAccount = '/setupAccount';
-  static const String accountVerification = '/accountVerification';
-  static const String uploadCompanyDocument = '/uploadCompanyDocument';
-  static const String setupPin = '/setupPin';
-  static const String confirmPin = '/confirmPin';
-  static const String successRegistration = '/successRegistration';
-  static const String readyToGo = '/readyToGo';
-  static const String forgotPin = '/forgotPin';
-  static const String enterResetPin = '/enterResetPin';
-  static const String setupNewPin = '/setupNewPin';
-  static const String pinResetSuccess = '/pinResetSuccess';
-
-
+  static const String signIn = '/signIn';
   static const String bottomNav = "/bottomNav";
+  static const String published = "/published";
+
+  //
+  // static const String newSignIn = '/newLogin';
+  // static const String enterLoginPin = '/enterLoginPin';
+  // static const String accountVerification = '/accountVerification';
+  // static const String uploadCompanyDocument = '/uploadCompanyDocument';
+  // static const String setupPin = '/setupPin';
+  // static const String confirmPin = '/confirmPin';
+  // static const String successRegistration = '/successRegistration';
+  // static const String readyToGo = '/readyToGo';
+  // static const String forgotPin = '/forgotPin';
+  // static const String enterResetPin = '/enterResetPin';
+  // static const String setupNewPin = '/setupNewPin';
+  // static const String pinResetSuccess = '/pinResetSuccess';
 
 // static const String otp = '/otp';
 // static const String emailOtp = '/emailOtp';

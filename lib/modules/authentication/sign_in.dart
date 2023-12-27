@@ -1,8 +1,8 @@
 import 'package:medilearnpro/router/route_paths.dart';
 import 'package:medilearnpro/shared/widgets/all_package.dart';
 
-class SetupAccount extends StatelessWidget {
-  const SetupAccount({Key? key}) : super(key: key);
+class SignIn extends StatelessWidget {
+  const SignIn({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +19,7 @@ class SetupAccount extends StatelessWidget {
                 children: [
                   HSpace(24.h),
                   Styles.regular(
-                    "Let’s get you Started",
+                    "Hey there 👋, Welcome Back",
                     color: AppColors.black,
                     fontSize: 36.sp,
                     fontWeight: FontWeight.w700,
@@ -29,9 +29,9 @@ class SetupAccount extends StatelessWidget {
                   CustomButton(
                     isActive: true,
                     margin: 0.w,
-                    title: "Continue",
+                    title: "Sign in",
                     onPress: () =>
-                        Navigator.pushNamed(context, RoutePaths.signIn),
+                        Navigator.pushNamed(context, RoutePaths.bottomNav),
                   ),
                 ],
               ),
@@ -45,34 +45,6 @@ class SetupAccount extends StatelessWidget {
         // key: viewModel.signupFormKey,
         child: Column(
       children: [
-        Row(
-          children: [
-            Expanded(
-              child: CustomTextFormField(
-                // controller: viewModel.firstNameController,
-                label: "First Name",
-                labelColor: AppColors.textDarkColor,
-                textInputType: TextInputType.name,
-                hintText: "Enter First Name",
-                autovalidateMode: AutovalidateMode.onUserInteraction,
-                validator: FieldValidator.validate,
-              ),
-            ),
-            WSpace(24.w),
-            Expanded(
-              child: CustomTextFormField(
-                // controller: viewModel.lastNameController,
-                label: "Last Name",
-                labelColor: AppColors.textDarkColor,
-                textInputType: TextInputType.name,
-                hintText: "Enter Last Name",
-                autovalidateMode: AutovalidateMode.onUserInteraction,
-                validator: FieldValidator.validate,
-              ),
-            ),
-          ],
-        ),
-        HSpace(16.h),
         CustomTextFormField(
           // controller: viewModel.emailController,
           label: "Email Address",
@@ -104,29 +76,7 @@ class SetupAccount extends StatelessWidget {
           autovalidateMode: AutovalidateMode.onUserInteraction,
           validator: PasswordValidator.validatePassword,
         ),
-        HSpace(16.h),
-        CustomTextFormField(
-          // controller: viewModel.confirmPasswordController,
-          label: "Confirm Password",
-          labelColor: AppColors.textDarkColor,
-          textInputType: TextInputType.visiblePassword,
-          hintText: "Enter Confirm Password",
-          // obscureText: !viewModel.isConfirmPasswordVisible,
-          suffixIcon: GestureDetector(
-              // onTap: viewModel.setConfirmPasswordVisible,
-              child: Padding(
-            padding: EdgeInsets.all(15.r),
-            child: SvgPicture.asset(
-              // viewModel.isConfirmPasswordVisible
-              true ? SvgAssets.eye : SvgAssets.eyeSlash,
-              width: 20.w,
-              height: 20.h,
-            ),
-          )),
-          autovalidateMode: AutovalidateMode.onUserInteraction,
-          validator: PasswordValidator.confirmPassword,
-        ),
-        HSpace(24.h),
+        HSpace(deviceHeight(context) / 3.9.h),
         Divider(),
         HSpace(16.h),
         RichText(

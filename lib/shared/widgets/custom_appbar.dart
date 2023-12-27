@@ -15,33 +15,33 @@ AppBar buildAppbar(
   return AppBar(
     automaticallyImplyLeading: false,
     elevation: 0.0,
-    backgroundColor: Colors.transparent,
+    backgroundColor: AppColors.white,
     title: title,
     centerTitle: centerTitle ?? true,
     bottom: bottom,
     leading: hasLeading
         ? GestureDetector(
-      onTap: () {
-        Navigator.pop(context);
-      },
-      child: Padding(
-          padding: EdgeInsets.only(left: 15.w),
-          child: Row(
-            children: [
-              Platform.isAndroid
-                  ? Icon(
-                      Icons.arrow_back,
-                      size: 24.sp,
-                      color: AppColors.offBlack,
-                    )
-                  : Icon(
-                      Icons.arrow_back_ios,
-                      color: AppColors.offBlack,
-                      size: 24.sp,
-                    ),
-            ],
-          )),
-    )
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: Padding(
+                padding: EdgeInsets.only(left: 15.w),
+                child: Row(
+                  children: [
+                    Platform.isAndroid
+                        ? Icon(
+                            Icons.arrow_back,
+                            size: 24.sp,
+                            color: AppColors.offBlack,
+                          )
+                        : Icon(
+                            Icons.arrow_back_ios,
+                            color: AppColors.offBlack,
+                            size: 24.sp,
+                          ),
+                  ],
+                )),
+          )
         : const SizedBox(),
     actions: actions,
   );

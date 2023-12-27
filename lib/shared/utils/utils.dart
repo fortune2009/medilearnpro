@@ -5,6 +5,7 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_web_browser/flutter_web_browser.dart';
 import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -163,11 +164,14 @@ class Helper {
   }
 }
 
-
 launchURL({required String url}) async {
   if (await canLaunch(url)) {
     await launch(url);
   } else {
     throw 'Could not launch $url';
   }
+}
+
+openBrowserTab({required String url}) async {
+  await FlutterWebBrowser.openWebPage(url: url);
 }
