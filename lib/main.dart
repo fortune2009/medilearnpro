@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:medilearnpro/core/service-injector/service_injector.dart';
 import 'package:medilearnpro/router/main_router.dart';
@@ -59,8 +58,10 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      designSize: Size(logicalWidth(), logicalHeight()),
-      builder: (context, Widget? child) => MultiProvider(
+      // designSize: Size(logicalWidth(), logicalHeight()),
+      designSize: Size(logicalWidth() ?? 360.0, logicalHeight() ?? 772.0),
+      // builder: (context, Widget? child) => MultiProvider(
+      builder: () => MultiProvider(
         providers: allProviders,
         child: MaterialApp(
           useInheritedMediaQuery: true,
@@ -76,4 +77,3 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
     );
   }
 }
-

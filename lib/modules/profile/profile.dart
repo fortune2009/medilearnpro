@@ -33,8 +33,8 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
               radius: 60.r,
             ),
             HSpace(18.h),
-            Styles.regular("Class 1 • Section A",
-                color: AppColors.black, fontSize: 12.sp),
+            // Styles.regular("Class 1 • Section A",
+            //     color: AppColors.black, fontSize: 12.sp),
             HSpace(14.h),
             Padding(
               padding: EdgeInsets.only(left: 16.w, right: 16.w, top: 8.h),
@@ -76,15 +76,169 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
             ),
             HSpace(16.h),
             SizedBox(
-                height: deviceHeight(context) / 2.5.h,
+                height: deviceHeight(context) / 2.h,
 
                 /// If list is empty set to 300.h
                 child: TabBarView(
                   // viewportFraction: 0.5,
                   controller: tabController,
                   children: [
-                    Container(),
-                    Container(),
+                    Container(
+                      padding: EdgeInsets.symmetric(horizontal: 16.w),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          HSpace(15.h),
+                          Container(
+                            width: deviceWidth(context),
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 16.w, vertical: 13.h),
+                            decoration: BoxDecoration(
+                                color: AppColors.white,
+                                border: Border.all(color: AppColors.borderGrey),
+                                borderRadius: BorderRadius.circular(8.r)),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Styles.regular("Full Name",
+                                    fontSize: 12.sp,
+                                    color: AppColors.blackText),
+                                HSpace(13.h),
+                                Styles.medium("David Muritala",
+                                    fontSize: 14.sp,
+                                    color: AppColors.blackText),
+                              ],
+                            ),
+                          ),
+                          HSpace(22.h),
+                          Container(
+                            width: deviceWidth(context),
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 16.w, vertical: 13.h),
+                            decoration: BoxDecoration(
+                                color: AppColors.white,
+                                border: Border.all(color: AppColors.borderGrey),
+                                borderRadius: BorderRadius.circular(8.r)),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Styles.regular("Email Address",
+                                    fontSize: 12.sp,
+                                    color: AppColors.blackText),
+                                HSpace(13.h),
+                                Styles.medium("Davidmuritala@gmail.com",
+                                    fontSize: 14.sp,
+                                    color: AppColors.blackText),
+                              ],
+                            ),
+                          ),
+                          HSpace(22.h),
+                          Container(
+                            width: deviceWidth(context),
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 16.w, vertical: 13.h),
+                            decoration: BoxDecoration(
+                                color: AppColors.white,
+                                border: Border.all(color: AppColors.borderGrey),
+                                borderRadius: BorderRadius.circular(8.r)),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Styles.regular("Mobile Number",
+                                    fontSize: 12.sp,
+                                    color: AppColors.blackText),
+                                HSpace(13.h),
+                                Styles.medium("+234 80 852 08502",
+                                    fontSize: 14.sp,
+                                    color: AppColors.blackText),
+                              ],
+                            ),
+                          ),
+                          HSpace(22.h),
+                          Container(
+                            width: deviceWidth(context),
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 16.w, vertical: 13.h),
+                            decoration: BoxDecoration(
+                                color: AppColors.white,
+                                border: Border.all(color: AppColors.borderGrey),
+                                borderRadius: BorderRadius.circular(8.r)),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Styles.regular("Region",
+                                    fontSize: 12.sp,
+                                    color: AppColors.blackText),
+                                HSpace(13.h),
+                                Styles.medium("Lagos, Nigeria",
+                                    fontSize: 14.sp,
+                                    color: AppColors.blackText),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      padding: EdgeInsets.symmetric(horizontal: 16.w),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          HSpace(15.h),
+                          Container(
+                            width: deviceWidth(context),
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 16.w, vertical: 13.h),
+                            decoration: BoxDecoration(
+                                color: AppColors.white,
+                                border: Border.all(color: AppColors.borderGrey),
+                                borderRadius: BorderRadius.circular(8.r)),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Styles.regular("Lessons Taken",
+                                    fontSize: 12.sp,
+                                    color: AppColors.blackText),
+                                HSpace(13.h),
+                                Styles.medium("12",
+                                    fontSize: 14.sp,
+                                    color: AppColors.blackText),
+                              ],
+                            ),
+                          ),
+                          HSpace(22.h),
+                          Container(
+                            width: deviceWidth(context),
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 16.w, vertical: 13.h),
+                            decoration: BoxDecoration(
+                                color: AppColors.white,
+                                border: Border.all(color: AppColors.borderGrey),
+                                borderRadius: BorderRadius.circular(8.r)),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Styles.regular("Quizz Completed",
+                                    fontSize: 12.sp,
+                                    color: AppColors.blackText),
+                                HSpace(13.h),
+                                Styles.medium("12",
+                                    fontSize: 14.sp,
+                                    color: AppColors.blackText),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                   ],
                 )),
           ],

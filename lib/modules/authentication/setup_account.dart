@@ -29,10 +29,27 @@ class SetupAccount extends StatelessWidget {
                   CustomButton(
                     isActive: true,
                     margin: 0.w,
-                    title: "Continue",
+                    title: "Create",
                     onPress: () =>
                         Navigator.pushNamed(context, RoutePaths.signIn),
                   ),
+                  HSpace(16.h),
+                  RichText(
+                    text: TextSpan(
+                      children: [
+                        Styles.spanRegular("Already have an account? ",
+                            color: AppColors.textLightColor, fontSize: 14.sp),
+                        Styles.spanRegular("Sign in",
+                            color: AppColors.textBoldColor,
+                            fontSize: 14.sp,
+                            fontWeight: FWt.bold,
+                            underline: true,
+                            recognizer: () => Navigator.pushNamed(
+                                context, RoutePaths.signIn)),
+                      ],
+                    ),
+                  ),
+                  HSpace(32.h),
                 ],
               ),
             ),

@@ -2,6 +2,7 @@
 
 import 'dart:convert';
 import 'dart:typed_data';
+import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -56,15 +57,31 @@ String formatDateApi(DateTime dateTime) {
 }
 
 ///design height(responsiveness)
-double logicalHeight() {
-  return WidgetsBinding.instance.window.physicalSize.height /
-      WidgetsBinding.instance.window.devicePixelRatio;
+double? logicalHeight() {
+  final largestPhysicalSize = PlatformDispatcher.instance.views
+      .map((v) => v.physicalSize)
+      .reduce((curr, next) =>
+          curr.width * curr.height > next.width * next.height ? curr : next);
+
+  final devicePixelRatio =
+      PlatformDispatcher.instance.views.map((v) => v.devicePixelRatio).first;
+  debugPrint(
+      "New logicalHeight ${largestPhysicalSize.height / devicePixelRatio}");
+  return largestPhysicalSize.height / devicePixelRatio;
 }
 
 ///design width(responsiveness)
-double logicalWidth() {
-  return WidgetsBinding.instance.window.physicalSize.width /
-      WidgetsBinding.instance.window.devicePixelRatio;
+double? logicalWidth() {
+  final largestPhysicalSize = PlatformDispatcher.instance.views
+      .map((v) => v.physicalSize)
+      .reduce((curr, next) =>
+          curr.width * curr.height > next.width * next.height ? curr : next);
+
+  final devicePixelRatio =
+      PlatformDispatcher.instance.views.map((v) => v.devicePixelRatio).first;
+  debugPrint(
+      "New logicalWidth ${largestPhysicalSize.width / devicePixelRatio}");
+  return largestPhysicalSize.width / devicePixelRatio;
 }
 
 double deviceHeight(BuildContext context) {

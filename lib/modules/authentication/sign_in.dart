@@ -33,6 +33,23 @@ class SignIn extends StatelessWidget {
                     onPress: () =>
                         Navigator.pushNamed(context, RoutePaths.bottomNav),
                   ),
+                  HSpace(16.h),
+                  RichText(
+                    text: TextSpan(
+                      children: [
+                        Styles.spanRegular("Don't have an account? ",
+                            color: AppColors.textLightColor, fontSize: 14.sp),
+                        Styles.spanRegular("Sign up",
+                            color: AppColors.textBoldColor,
+                            fontSize: 14.sp,
+                            fontWeight: FWt.bold,
+                            underline: true,
+                            recognizer: () => Navigator.pushNamed(
+                                context, RoutePaths.setupAccount)),
+                      ],
+                    ),
+                  ),
+                  HSpace(32.h),
                 ],
               ),
             ),
@@ -76,40 +93,27 @@ class SignIn extends StatelessWidget {
           autovalidateMode: AutovalidateMode.onUserInteraction,
           validator: PasswordValidator.validatePassword,
         ),
-        HSpace(deviceHeight(context) / 3.9.h),
-        Divider(),
+        // HSpace(deviceHeight(context) / 4.h),
+        // Divider(),
         HSpace(16.h),
-        RichText(
-          text: TextSpan(
-            children: [
-              Styles.spanRegular(
-                  "Clicking continue Shows that you agree to our ",
-                  color: AppColors.textLightColor,
-                  fontSize: 14.sp),
-              Styles.spanRegular("Terms and Conditions",
-                  color: AppColors.textBoldColor,
-                  fontSize: 14.sp,
-                  fontWeight: FWt.bold,
-                  underline: true, recognizer: () async {
-                await openBrowserTab(
-                    url: "https://app.simplebks.com/terms-of-service");
-              }),
-              Styles.spanRegular(
-                " while interacting with our platform",
-                color: AppColors.textLightColor,
-                fontSize: 14.sp,
+        Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            RichText(
+              text: TextSpan(
+                children: [
+                  Styles.spanRegular("Forgot password",
+                      color: AppColors.textBoldColor,
+                      fontSize: 14.sp,
+                      fontWeight: FWt.bold,
+                      underline: true,
+                      recognizer: () {}),
+                ],
               ),
-              // Styles.spanRegular("Privacy Policy.",
-              //     color: AppColors.textDarkColor,
-              //     fontSize: 11.sp,
-              //     underline: true, recognizer: () async {
-              //   await openBrowserTab(
-              //       url: "https://app.simplebks.com/privacy-policy");
-              // }),
-            ],
-          ),
+            ),
+          ],
         ),
-        HSpace(26.8.h),
+        HSpace(16.h),
       ],
     ));
   }

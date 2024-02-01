@@ -31,6 +31,7 @@ class SvgAssets {
   static const String profile1 = "$SVGPATH/profile_1.svg";
   static const String bell = "$SVGPATH/bell.svg";
   static const String backBtn = "$SVGPATH/back_btn.svg";
+  static const String search = "$SVGPATH/search.svg";
 }
 
 class LottieAssets {
