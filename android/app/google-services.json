@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "630392030201",
+    "project_id": "medilearning-4f539",
+    "storage_bucket": "medilearning-4f539.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:630392030201:android:c574287bce0d21b3a03328",
+        "android_client_info": {
+          "package_name": "com.tgde.medilearnpro"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAx_CffkjzqWFhnziD4Q670L6wJy3KP5RY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
