@@ -1,7 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:medilearnpro/shared/widgets/all_package.dart';
 
+import '../../core/service-injector/service_injector.dart';
 import '../../router/route_paths.dart';
-
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -11,11 +12,37 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-
   @override
   void initState() {
     super.initState();
-    _startTimer(RoutePaths.splashOptions);
+    firstInit();
+  }
+
+  firstInit() {
+    bool hasOpenedApp = false;
+    debugPrint("ASDE ${si.storageService.getBoolItemSync('app-opened')}");
+    final data = si.storageService.getItemSync('app-opened');
+    if (data.isNotEmpty) {
+      try {
+        hasOpenedApp = jsonDecode(data);
+      } catch (e) {
+        debugPrint("open app error $e");
+      }
+    }
+
+    if (hasOpenedApp) {
+      FirebaseAuth.instance.authStateChanges().listen((User? user) {
+        if (user == null) {
+          print('User is currently signed out!');
+          _startTimer(RoutePaths.signIn);
+        } else {
+          _startTimer(RoutePaths.bottomNav);
+          print('User is signed in!');
+        }
+      });
+    } else {
+      _startTimer(RoutePaths.splashOptions);
+    }
   }
 
   _startTimer(routeName) {
@@ -56,11 +83,10 @@ class _SplashScreenState extends State<SplashScreen> {
         //   ),
         // ),
         Positioned.fill(
-          child: Align(alignment: Alignment.topCenter,
+          child: Align(
+            alignment: Alignment.topCenter,
             child: Container(
-              decoration: const BoxDecoration(
-                color: AppColors.white
-              ),
+              decoration: const BoxDecoration(color: AppColors.white),
               width: deviceWidth(context),
               height: deviceHeight(context),
             ),
@@ -81,10 +107,3 @@ class _SplashScreenState extends State<SplashScreen> {
     );
   }
 }
-
-
-
-
-
-
-

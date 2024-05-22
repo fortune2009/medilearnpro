@@ -16,7 +16,7 @@ class MainRouter {
       case RoutePaths.splashOptions:
         return MaterialPageRoute(builder: (_) => const SplashOptions());
       case RoutePaths.setupAccount:
-        return MaterialPageRoute(builder: (_) => const SetupAccount());
+        return MaterialPageRoute(builder: (_) => SetupAccount());
       case RoutePaths.signIn:
         return MaterialPageRoute(builder: (_) => const SignIn());
       case RoutePaths.published:

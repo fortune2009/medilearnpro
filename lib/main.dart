@@ -1,11 +1,31 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
 import 'package:medilearnpro/core/service-injector/service_injector.dart';
+import 'package:medilearnpro/firebase_options.dart';
 import 'package:medilearnpro/router/main_router.dart';
 import 'package:medilearnpro/shared/widgets/all_package.dart';
 
 import 'core/locator/locator.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  // await Firebase.initializeApp(
+  //   options: DefaultFirebaseConfig.platformOptions,
+  // );
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  try {
+    await FirebaseAuth.instance.useAuthEmulator('localhost', 9099);
+  } catch (e) {
+    print("firebase authemulator error at e");
+    print(e);
+  }
+  // try {
+  //   FirebaseFirestore.instance.useFirestoreEmulator('localhost', 8080);
+  // } catch (e){
+  //   print("firestore emulator error at e");
+  //   print(e);
+  // }
   runApp(const MyApp());
 }
 

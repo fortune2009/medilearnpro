@@ -1,3 +1,4 @@
+import 'package:medilearnpro/core/service-injector/service_injector.dart';
 import 'package:medilearnpro/router/route_paths.dart';
 import 'package:medilearnpro/shared/widgets/all_package.dart';
 
@@ -30,8 +31,10 @@ class SignIn extends StatelessWidget {
                     isActive: true,
                     margin: 0.w,
                     title: "Sign in",
-                    onPress: () =>
-                        Navigator.pushNamed(context, RoutePaths.bottomNav),
+                    onPress: () {
+                      si.storageService.setBoolItem('app-opened', true);
+                      Navigator.pushNamed(context, RoutePaths.bottomNav);
+                    },
                   ),
                   HSpace(16.h),
                   RichText(
