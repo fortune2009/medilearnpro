@@ -11,33 +11,43 @@ class Lessons extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
-              height: 100.h,
+            // HSpace(100.h),
+            Padding(
               padding: EdgeInsets.only(
                 left: 24.w,
                 right: 24.w,
                 top: 30.h,
               ),
-              decoration: const BoxDecoration(
-                  // color: AppColors.white,
-                  ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Styles.regular("Lets get you caught up",
-                          color: AppColors.black, fontSize: 14.sp),
-                      HSpace(4.h),
-                      Styles.semiBold("David Muritala",
-                          color: AppColors.black, fontSize: 18.sp),
-                    ],
-                  ),
-                  SvgPicture.asset(SvgAssets.bell),
-                ],
-              ),
+              child: Styles.regular("Lets get you caught up",
+                  color: AppColors.black, fontSize: 16.sp),
             ),
+            // Container(
+            //   // height: 100.h,
+            //   padding: EdgeInsets.only(
+            //     left: 24.w,
+            //     right: 24.w,
+            //     top: 30.h,
+            //   ),
+            //   decoration: const BoxDecoration(
+            //       // color: AppColors.white,
+            //       ),
+            //   child: Row(
+            //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //     children: [
+            //       Column(
+            //         crossAxisAlignment: CrossAxisAlignment.start,
+            //         children: [
+            //           Styles.regular("Lets get you caught up",
+            //               color: AppColors.black, fontSize: 14.sp),
+            //           // HSpace(4.h),
+            //           // Styles.semiBold("David Muritala",
+            //           //     color: AppColors.black, fontSize: 18.sp),
+            //         ],
+            //       ),
+            //       // SvgPicture.asset(SvgAssets.bell),
+            //     ],
+            //   ),
+            // ),
             // HSpace(16.h),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 24.w),

@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:medilearnpro/shared/widgets/all_package.dart';
 
 import '../../core/service-injector/service_injector.dart';
@@ -20,26 +19,29 @@ class _SplashScreenState extends State<SplashScreen> {
 
   firstInit() {
     bool hasOpenedApp = false;
-    debugPrint("ASDE ${si.storageService.getBoolItemSync('app-opened')}");
-    final data = si.storageService.getItemSync('app-opened');
-    if (data.isNotEmpty) {
+    // debugPrint("ASDE ${si.storageService.getBoolItemSync('app-opened')}");
+    // debugPrint("ASDE ${jsonDecode(si.storageService.getItemSync('user'))}");
+    // final data = si.storageService.getItemSync('app-opened');
+    final data = si.storageService.getBoolItemSync('app-opened');
+    final userData = si.storageService.getItemSync('user');
+    if (data) {
       try {
-        hasOpenedApp = jsonDecode(data);
+        hasOpenedApp = data;
+        debugPrint("ASDEEE $hasOpenedApp");
       } catch (e) {
         debugPrint("open app error $e");
       }
     }
 
     if (hasOpenedApp) {
-      FirebaseAuth.instance.authStateChanges().listen((User? user) {
-        if (user == null) {
-          print('User is currently signed out!');
-          _startTimer(RoutePaths.signIn);
-        } else {
-          _startTimer(RoutePaths.bottomNav);
-          print('User is signed in!');
-        }
-      });
+      final user = jsonDecode(userData);
+      if (user == null) {
+        debugPrint('User is currently signed out!');
+        _startTimer(RoutePaths.signIn);
+      } else {
+        _startTimer(RoutePaths.bottomNav);
+        debugPrint('User is signed in!');
+      }
     } else {
       _startTimer(RoutePaths.splashOptions);
     }

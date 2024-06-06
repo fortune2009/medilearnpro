@@ -1,157 +1,116 @@
-// ignore_for_file: prefer_collection_literals, unnecessary_this
+// To parse this JSON data, do
+//
+//     final createAccountDto = createAccountDtoFromJson(jsonString);
 
 import 'dart:convert';
 
-CreateAccountPayLoad createAccountPayLoadFromJson(String str) =>
-    CreateAccountPayLoad.fromJson(json.decode(str));
+CreateAccountDto createAccountDtoFromJson(String str) =>
+    CreateAccountDto.fromJson(json.decode(str));
 
-String createAccountPayLoadToJson(CreateAccountPayLoad data) =>
+String createAccountDtoToJson(CreateAccountDto data) =>
     json.encode(data.toJson());
 
-class CreateAccountPayLoad {
-  CreateAccountPayLoad({
-    this.payload,
-    this.totalCount,
-    this.errors,
-    this.hasErrors,
-    this.code,
-    this.description,
+class CreateAccountDto {
+  String? kind;
+  String? idToken;
+  String? email;
+  String? displayName;
+  String? refreshToken;
+  String? expiresIn;
+  String? localId;
+  String? requestType;
+  CreateAccountDtoError? error;
+
+  CreateAccountDto({
+    this.kind,
+    this.idToken,
+    this.email,
+    this.displayName,
+    this.refreshToken,
+    this.expiresIn,
+    this.localId,
+    this.requestType,
+    this.error,
   });
 
-  Payload? payload;
-  int? totalCount;
-  List<dynamic>? errors;
-  bool? hasErrors;
-  int? code;
-  String? description;
-
-  factory CreateAccountPayLoad.fromJson(Map<String, dynamic> json) =>
-      CreateAccountPayLoad(
-        payload:
-            json["payload"] == null ? null : Payload.fromJson(json["payload"]),
-        totalCount: json["totalCount"],
-        errors: json["errors"] == null
-            ? []
-            : List<dynamic>.from(json["errors"]!.map((x) => x)),
-        hasErrors: json["hasErrors"],
-        code: json["code"],
-        description: json["description"],
+  factory CreateAccountDto.fromJson(Map<String, dynamic> json) =>
+      CreateAccountDto(
+        kind: json["kind"],
+        idToken: json["idToken"],
+        email: json["email"],
+        displayName: json["displayName"],
+        refreshToken: json["refreshToken"],
+        expiresIn: json["expiresIn"],
+        localId: json["localId"],
+        requestType: json["requestType"],
+        error: json["error"] == null
+            ? null
+            : CreateAccountDtoError.fromJson(json["error"]),
       );
 
   Map<String, dynamic> toJson() => {
-        "payload": payload?.toJson(),
-        "totalCount": totalCount,
-        "errors":
-            errors == null ? [] : List<dynamic>.from(errors!.map((x) => x)),
-        "hasErrors": hasErrors,
-        "code": code,
-        "description": description,
+        "kind": kind,
+        "idToken": idToken,
+        "email": email,
+        "displayName": displayName,
+        "refreshToken": refreshToken,
+        "expiresIn": expiresIn,
+        "localId": localId,
+        "requestType": requestType,
+        "error": error?.toJson(),
       };
 }
 
-// class CreateAccountPayLoad {
-//   int? code;
-//   String? description;
-//   List<Payload>? payload;
-//   int? totalCount;
-//   List<String>? errors;
-//   bool? hasErrors;
-//
-//   CreateAccountPayLoad(
-//       {this.code,
-//       this.description,
-//       this.payload,
-//       this.totalCount,
-//       this.errors,
-//       this.hasErrors});
-//
-//   CreateAccountPayLoad.fromJson(Map<String, dynamic> json) {
-//     code = json['code'];
-//     description = json['description'];
-//     if (json['payload'] != null) {
-//       payload = <Payload>[];
-//       json['payload'].forEach((v) {
-//         payload!.add(Payload.fromJson(v));
-//       });
-//     }
-//     totalCount = json['totalCount'];
-//     errors = json['errors'].cast<String>();
-//     hasErrors = json['hasErrors'];
-//   }
-//
-//   Map<String, dynamic> toJson() {
-//     final Map<String, dynamic> data = Map<String, dynamic>();
-//     data['code'] = this.code;
-//     data['description'] = this.description;
-//     if (this.payload != null) {
-//       data['payload'] = this.payload!.map((v) => v.toJson()).toList();
-//     }
-//     data['totalCount'] = this.totalCount;
-//     data['errors'] = this.errors;
-//     data['hasErrors'] = this.hasErrors;
-//     return data;
-//   }
-// }
+class CreateAccountDtoError {
+  int? code;
+  String? message;
+  List<ErrorElement>? errors;
 
-// class Payload {
-//   List<String>? memberNames;
-//   String? errorMessage;
-//   String? requestId;
-//   String? message;
-//
-//   Payload({
-//     this.memberNames,
-//     this.errorMessage,
-//     this.requestId,
-//     this.message,
-//   });
-//
-//   Payload.fromJson(Map<String, dynamic> json) {
-//     memberNames =
-//         json["memberNames"] == null ? [] : json['memberNames'].cast<String>();
-//     errorMessage = json['errorMessage'];
-//     requestId = json["requestId"];
-//     message = json["message"];
-//   }
-//
-//   Map<String, dynamic> toJson() {
-//     final Map<String, dynamic> data = Map<String, dynamic>();
-//     data['memberNames'] = this.memberNames;
-//     data['errorMessage'] = this.errorMessage;
-//     data['requestId'] = this.errorMessage;
-//     data['message'] = this.errorMessage;
-//     return data;
-//   }
-// }
-
-class Payload {
-  Payload({
-    this.requestId,
+  CreateAccountDtoError({
+    this.code,
     this.message,
-    this.memberNames,
-    this.errorMessage,
+    this.errors,
   });
 
-  String? requestId;
-  String? message;
-  List<String>? memberNames;
-  String? errorMessage;
-
-  factory Payload.fromJson(Map<String, dynamic> json) => Payload(
-        requestId: json["requestId"],
+  factory CreateAccountDtoError.fromJson(Map<String, dynamic> json) =>
+      CreateAccountDtoError(
+        code: json["code"],
         message: json["message"],
-        memberNames: json["memberNames"] == null
+        errors: json["errors"] == null
             ? []
-            : List<String>.from(json["memberNames"]!.map((x) => x)),
-        errorMessage: json["errorMessage"],
+            : List<ErrorElement>.from(
+                json["errors"]!.map((x) => ErrorElement.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
-        "requestId": requestId,
+        "code": code,
         "message": message,
-        "memberNames": memberNames == null
+        "errors": errors == null
             ? []
-            : List<dynamic>.from(memberNames!.map((x) => x)),
-        "errorMessage": errorMessage,
+            : List<dynamic>.from(errors!.map((x) => x.toJson())),
+      };
+}
+
+class ErrorElement {
+  String? message;
+  String? domain;
+  String? reason;
+
+  ErrorElement({
+    this.message,
+    this.domain,
+    this.reason,
+  });
+
+  factory ErrorElement.fromJson(Map<String, dynamic> json) => ErrorElement(
+        message: json["message"],
+        domain: json["domain"],
+        reason: json["reason"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "message": message,
+        "domain": domain,
+        "reason": reason,
       };
 }

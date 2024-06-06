@@ -3,17 +3,18 @@
 
 const String _prodUrl = '';
 
+const String APIKEY = "AIzaSyAx_CffkjzqWFhnziD4Q670L6wJy3KP5RY";
 
-const String _devUrl = 'otto-api.sbscuk.co.uk';
-const String customUrl = 'otto-api.sbscuk.co.uk';
+// const String _devUrl = 'otto-api.sbscuk.co.uk';
+// const String customUrl = 'otto-api.sbscuk.co.uk';
 
-// here we have the settings for dev
+/// here we have the settings for dev
 // const String _devUrl = '40.67.166.30:8003';
 // const String customUrl = '40.67.166.30:8003';
 
-// here we have the settings for staging
-// const String _devUrl = 'stagingapi.crcdataanalytics.com';
-// const String customUrl = 'stagingapi.crcdataanalytics.com';
+/// here we have the settings for staging
+const String _devUrl = 'identitytoolkit.googleapis.com';
+const String customUrl = 'identitytoolkit.googleapis.com';
 
 class AppConfig {
   AppConfig();
@@ -29,7 +30,7 @@ class AppConfig {
   static String versionNumber = '0.0.1 (1)';
 
   static String get apiProtocol {
-    return AppConfig.isProd ? 'http' : 'http';
+    return AppConfig.isProd ? 'http' : 'https';
   }
 
   ///modified for current application
@@ -43,8 +44,7 @@ class AppConfig {
   // }
 
   static String apiPath(String path) {
-    return '/api/v1/' +
-        (path.startsWith('/') ? path.substring(1) : path);
+    return '/v1/' + (path.startsWith('/') ? path.substring(1) : path);
   }
 
   static String apiFullPath(String path) {

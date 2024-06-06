@@ -161,8 +161,7 @@ class ApiService {
     } on TimeoutException catch (e) {
       apiResponse.error = true;
       apiResponse.code = AuthConstants.failedCode;
-      apiResponse.message =
-          ('Request timeout. Please try again').toString();
+      apiResponse.message = ('Request timeout. Please try again').toString();
 
       return apiResponse;
     } on SocketException {
@@ -264,6 +263,8 @@ class ApiService {
 
       final http.Response res = await http.get(uri, headers: headers);
 
+      // debugPrint('Body2: $uri');
+      // debugPrint('Body2: ${res.body}');
       final dynamic data = json.decode(res.body);
 
       if (res.statusCode == 200 || res.statusCode == 201) {
@@ -339,7 +340,7 @@ class ApiService {
       apiResponse.code = AuthConstants.failedCode;
       apiResponse.message = ("No connection 🥲").toString();
     } catch (e) {
-      debugPrint('Body6:');
+      debugPrint('Body6: $e');
       apiResponse.error = true;
       apiResponse.code = AuthConstants.failedCode;
     }
@@ -555,14 +556,14 @@ class ApiService {
   }
 
   Future<ApiResponse<T>> postApi<T>(
-      String url,
-      dynamic body, {
-        T Function(dynamic)? transform,
-        bool skipStatusCheck = false,
-        bool useToken = false,
-        Map<String, String>? customHeaders,
-        Map<String, String>? params,
-      }) async {
+    String url,
+    dynamic body, {
+    T Function(dynamic)? transform,
+    bool skipStatusCheck = false,
+    bool useToken = false,
+    Map<String, String>? customHeaders,
+    Map<String, String>? params,
+  }) async {
     transform ??= (dynamic r) => r.body as T;
 
     // final ApiResponse<T> apiResponse = ApiResponse<T>();
@@ -584,12 +585,15 @@ class ApiService {
         };
       }
 
-      final http.Response res =
-      await http.post(uri, headers: headers, body: httpBody(body))
+      final http.Response res = await http
+          .post(uri, headers: headers, body: httpBody(body))
           .timeout(const Duration(seconds: 60));
 
+      // debugPrint("Post DAta full response $uri}");
+      // debugPrint("Post res body ${res.body}");
+      // debugPrint("Post DAta response code ${res.statusCode}");
 
-      if(res.statusCode == 200 || res.statusCode == 201) {
+      if (res.statusCode == 200 || res.statusCode == 201) {
         final dynamic data = json.decode(res.body);
 
         debugPrint("Post DAta response code ${res.statusCode}");
@@ -598,12 +602,12 @@ class ApiService {
         debugPrint("Post DAta data ${data}");
 
         // apiResponse = ApiResponse.fromJson(data);
-        apiResponse.error = data["error"];
+        apiResponse.error = false;
         apiResponse.message = data["message"];
         apiResponse.code = res.statusCode;
         apiResponse.data = transform(data);
         return apiResponse;
-      } else if(res.statusCode == 401) {
+      } else if (res.statusCode == 401) {
         final dynamic data = json.decode(res.body);
 
         debugPrint("Post DAta response code ${res.statusCode}");
@@ -612,35 +616,33 @@ class ApiService {
         debugPrint("Post DAta data ${data}");
 
         apiResponse.error = data["error"];
-        apiResponse.message = data["message"];
+        apiResponse.message = data["error"]["message"];
         apiResponse.code = res.statusCode;
         return apiResponse;
       } else {
-        if(res.body.startsWith("<HTML>")){
+        if (res.body.startsWith("<HTML>")) {
           apiResponse.error = true;
           apiResponse.message = "Server Error";
 
           debugPrint("Post DAta response code ${res.statusCode}");
           debugPrint("Post res body ${res.body}");
           debugPrint("Post DAta full response $uri}");
-
         } else {
           final dynamic data = json.decode(res.body);
 
-          debugPrint("Post DAta response code ${res.statusCode}");
+          debugPrint("QWE Post DAta response code ${res.statusCode}");
           debugPrint("Post res body ${res.body}");
           debugPrint("Post DAta full response $uri}");
           debugPrint("Post DAta data ${data}");
+          // debugPrint("Post DAta data ${data["message"]}");
 
-          apiResponse.error = data["error"];
-          apiResponse.message = data["message"];
+          apiResponse.error = data["error"] != null;
+          apiResponse.message = data["error"]["message"];
           apiResponse.data = transform(data);
           apiResponse.code = res.statusCode;
           return apiResponse;
-
         }
       }
-
     } on SocketException {
       apiResponse.error = true;
       apiResponse.message = ("No connection 🥲").toString();

@@ -1,3 +1,5 @@
+import 'package:medilearnpro/core/service-injector/service_injector.dart';
+import 'package:medilearnpro/modules/profile/viewmodel/profile_vm.dart';
 import 'package:medilearnpro/shared/widgets/all_package.dart';
 
 class Profile extends StatefulWidget {
@@ -24,18 +26,19 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    return BaseView<ProfileViewModel>(
+      vmBuilder: (context) =>
+          ProfileViewModel(context: context, profileService: si.profileService),
+      builder: _buildScreen,
+    );
+  }
+
+  Widget _buildScreen(BuildContext context, ProfileViewModel viewModel) {
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
           children: [
             HSpace(60.h),
-            CircleAvatar(
-              radius: 60.r,
-            ),
-            HSpace(18.h),
-            // Styles.regular("Class 1 • Section A",
-            //     color: AppColors.black, fontSize: 12.sp),
-            HSpace(14.h),
             Padding(
               padding: EdgeInsets.only(left: 16.w, right: 16.w, top: 8.h),
               child: Container(
@@ -106,7 +109,8 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
                                     fontSize: 12.sp,
                                     color: AppColors.blackText),
                                 HSpace(13.h),
-                                Styles.medium("David Muritala",
+                                Styles.medium(
+                                    viewModel.userData!.displayName ?? "",
                                     fontSize: 14.sp,
                                     color: AppColors.blackText),
                               ],
@@ -129,58 +133,58 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
                                     fontSize: 12.sp,
                                     color: AppColors.blackText),
                                 HSpace(13.h),
-                                Styles.medium("Davidmuritala@gmail.com",
+                                Styles.medium(viewModel.userData!.email ?? "",
                                     fontSize: 14.sp,
                                     color: AppColors.blackText),
                               ],
                             ),
                           ),
                           HSpace(22.h),
-                          Container(
-                            width: deviceWidth(context),
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 16.w, vertical: 13.h),
-                            decoration: BoxDecoration(
-                                color: AppColors.white,
-                                border: Border.all(color: AppColors.borderGrey),
-                                borderRadius: BorderRadius.circular(8.r)),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Styles.regular("Mobile Number",
-                                    fontSize: 12.sp,
-                                    color: AppColors.blackText),
-                                HSpace(13.h),
-                                Styles.medium("+234 80 852 08502",
-                                    fontSize: 14.sp,
-                                    color: AppColors.blackText),
-                              ],
-                            ),
-                          ),
-                          HSpace(22.h),
-                          Container(
-                            width: deviceWidth(context),
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 16.w, vertical: 13.h),
-                            decoration: BoxDecoration(
-                                color: AppColors.white,
-                                border: Border.all(color: AppColors.borderGrey),
-                                borderRadius: BorderRadius.circular(8.r)),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Styles.regular("Region",
-                                    fontSize: 12.sp,
-                                    color: AppColors.blackText),
-                                HSpace(13.h),
-                                Styles.medium("Lagos, Nigeria",
-                                    fontSize: 14.sp,
-                                    color: AppColors.blackText),
-                              ],
-                            ),
-                          ),
+                          // Container(
+                          //   width: deviceWidth(context),
+                          //   padding: EdgeInsets.symmetric(
+                          //       horizontal: 16.w, vertical: 13.h),
+                          //   decoration: BoxDecoration(
+                          //       color: AppColors.white,
+                          //       border: Border.all(color: AppColors.borderGrey),
+                          //       borderRadius: BorderRadius.circular(8.r)),
+                          //   child: Column(
+                          //     crossAxisAlignment: CrossAxisAlignment.start,
+                          //     mainAxisAlignment: MainAxisAlignment.start,
+                          //     children: [
+                          //       Styles.regular("Mobile Number",
+                          //           fontSize: 12.sp,
+                          //           color: AppColors.blackText),
+                          //       HSpace(13.h),
+                          //       Styles.medium("+234 80 852 08502",
+                          //           fontSize: 14.sp,
+                          //           color: AppColors.blackText),
+                          //     ],
+                          //   ),
+                          // ),
+                          // HSpace(22.h),
+                          // Container(
+                          //   width: deviceWidth(context),
+                          //   padding: EdgeInsets.symmetric(
+                          //       horizontal: 16.w, vertical: 13.h),
+                          //   decoration: BoxDecoration(
+                          //       color: AppColors.white,
+                          //       border: Border.all(color: AppColors.borderGrey),
+                          //       borderRadius: BorderRadius.circular(8.r)),
+                          //   child: Column(
+                          //     crossAxisAlignment: CrossAxisAlignment.start,
+                          //     mainAxisAlignment: MainAxisAlignment.start,
+                          //     children: [
+                          //       Styles.regular("Region",
+                          //           fontSize: 12.sp,
+                          //           color: AppColors.blackText),
+                          //       HSpace(13.h),
+                          //       Styles.medium("Lagos, Nigeria",
+                          //           fontSize: 14.sp,
+                          //           color: AppColors.blackText),
+                          //     ],
+                          //   ),
+                          // ),
                         ],
                       ),
                     ),
@@ -207,7 +211,7 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
                                     fontSize: 12.sp,
                                     color: AppColors.blackText),
                                 HSpace(13.h),
-                                Styles.medium("12",
+                                Styles.medium("0",
                                     fontSize: 14.sp,
                                     color: AppColors.blackText),
                               ],
@@ -230,7 +234,7 @@ class _ProfileState extends State<Profile> with TickerProviderStateMixin {
                                     fontSize: 12.sp,
                                     color: AppColors.blackText),
                                 HSpace(13.h),
-                                Styles.medium("12",
+                                Styles.medium("0",
                                     fontSize: 14.sp,
                                     color: AppColors.blackText),
                               ],

@@ -1,12 +1,22 @@
 import 'package:medilearnpro/core/service-injector/service_injector.dart';
+import 'package:medilearnpro/modules/authentication/viewmodel/sign_in_vm.dart';
 import 'package:medilearnpro/router/route_paths.dart';
 import 'package:medilearnpro/shared/widgets/all_package.dart';
 
 class SignIn extends StatelessWidget {
-  const SignIn({Key? key}) : super(key: key);
+  SignIn({Key? key}) : super(key: key);
+  final formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
+    return BaseView<SignInViewModel>(
+      vmBuilder: (context) => SignInViewModel(
+          context: context, authenticationService: si.authenticationService),
+      builder: _buildScreen,
+    );
+  }
+
+  Widget _buildScreen(BuildContext context, SignInViewModel viewModel) {
     return Scaffold(
         backgroundColor: AppColors.scaffoldBGColor,
         appBar: buildAppbar(context: context, hasLeading: false),
@@ -26,15 +36,17 @@ class SignIn extends StatelessWidget {
                     fontWeight: FontWeight.w700,
                   ),
                   HSpace(24.h),
-                  _buildForm(context),
+                  _buildForm(context, viewModel),
                   CustomButton(
                     isActive: true,
                     margin: 0.w,
                     title: "Sign in",
-                    onPress: () {
-                      si.storageService.setBoolItem('app-opened', true);
-                      Navigator.pushNamed(context, RoutePaths.bottomNav);
-                    },
+                    onPress: () => viewModel.validateSignIn(formKey),
+                    //
+                    // onPress: () {
+                    //   si.storageService.setBoolItem('app-opened', true);
+                    //   Navigator.pushNamed(context, RoutePaths.bottomNav);
+                    // },
                   ),
                   HSpace(16.h),
                   RichText(
@@ -60,64 +72,65 @@ class SignIn extends StatelessWidget {
         ));
   }
 
-  Widget _buildForm(BuildContext context) {
+  Widget _buildForm(BuildContext context, SignInViewModel viewModel) {
     return Form(
-        // key: viewModel.signupFormKey,
+        key: formKey,
         child: Column(
-      children: [
-        CustomTextFormField(
-          // controller: viewModel.emailController,
-          label: "Email Address",
-          labelColor: AppColors.textDarkColor,
-          textInputType: TextInputType.emailAddress,
-          hintText: "Enter Email Address",
-          autovalidateMode: AutovalidateMode.onUserInteraction,
-          validator: EmailValidator.validateEmail,
-        ),
-        HSpace(16.h),
-        CustomTextFormField(
-          // controller: viewModel.passwordController,
-          label: "Password",
-          labelColor: AppColors.textDarkColor,
-          textInputType: TextInputType.visiblePassword,
-          hintText: "Enter Password",
-          // obscureText: !viewModel.isPasswordVisible,
-          suffixIcon: GestureDetector(
-              // onTap: viewModel.setPasswordVisible,
-              child: Padding(
-            padding: EdgeInsets.all(15.r),
-            child: SvgPicture.asset(
-              // viewModel.isPasswordVisible
-              true ? SvgAssets.eye : SvgAssets.eyeSlash,
-              width: 20.w,
-              height: 20.h,
-            ),
-          )),
-          autovalidateMode: AutovalidateMode.onUserInteraction,
-          validator: PasswordValidator.validatePassword,
-        ),
-        // HSpace(deviceHeight(context) / 4.h),
-        // Divider(),
-        HSpace(16.h),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            RichText(
-              text: TextSpan(
-                children: [
-                  Styles.spanRegular("Forgot password",
-                      color: AppColors.textBoldColor,
-                      fontSize: 14.sp,
-                      fontWeight: FWt.bold,
-                      underline: true,
-                      recognizer: () {}),
-                ],
-              ),
+            CustomTextFormField(
+              controller: viewModel.emailController,
+              label: "Email Address",
+              labelColor: AppColors.textDarkColor,
+              textInputType: TextInputType.emailAddress,
+              hintText: "Enter Email Address",
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              validator: EmailValidator.validateEmail,
             ),
+            HSpace(16.h),
+            CustomTextFormField(
+              controller: viewModel.passwordController,
+              label: "Password",
+              labelColor: AppColors.textDarkColor,
+              textInputType: TextInputType.visiblePassword,
+              hintText: "Enter Password",
+              // obscureText: !viewModel.isPasswordVisible,
+              suffixIcon: GestureDetector(
+                  // onTap: viewModel.setPasswordVisible,
+                  child: Padding(
+                padding: EdgeInsets.all(15.r),
+                child: SvgPicture.asset(
+                  // viewModel.isPasswordVisible
+                  true ? SvgAssets.eye : SvgAssets.eyeSlash,
+                  width: 20.w,
+                  height: 20.h,
+                ),
+              )),
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              validator: PasswordValidator.validateLoginPassword,
+            ),
+            // HSpace(deviceHeight(context) / 4.h),
+            // Divider(),
+            HSpace(16.h),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                RichText(
+                  text: TextSpan(
+                    children: [
+                      Styles.spanRegular("Forgot password",
+                          color: AppColors.textBoldColor,
+                          fontSize: 14.sp,
+                          fontWeight: FWt.bold,
+                          underline: true,
+                          recognizer: () => Navigator.pushNamed(
+                              context, RoutePaths.forgotPassword)),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            HSpace(16.h),
           ],
-        ),
-        HSpace(16.h),
-      ],
-    ));
+        ));
   }
 }

@@ -3,7 +3,10 @@ class RoutePaths {
   static const String splashOptions = '/splashOptions';
   static const String setupAccount = '/setupAccount';
   static const String signIn = '/signIn';
+  static const String forgotPassword = '/forgotPassword';
+  static const String resetCode = '/resetCode';
   static const String bottomNav = "/bottomNav";
+  static const String notification = "/notification";
   static const String published = "/published";
 
   //
@@ -15,7 +18,6 @@ class RoutePaths {
   // static const String confirmPin = '/confirmPin';
   // static const String successRegistration = '/successRegistration';
   // static const String readyToGo = '/readyToGo';
-  // static const String forgotPin = '/forgotPin';
   // static const String enterResetPin = '/enterResetPin';
   // static const String setupNewPin = '/setupNewPin';
   // static const String pinResetSuccess = '/pinResetSuccess';

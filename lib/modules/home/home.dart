@@ -1,8 +1,22 @@
+import 'package:medilearnpro/core/service-injector/service_injector.dart';
 import 'package:medilearnpro/router/route_paths.dart';
 import 'package:medilearnpro/shared/widgets/all_package.dart';
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
+
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  String? displayName;
+  @override
+  void initState() {
+    var data = jsonDecode(si.storageService.getItemSync('user'));
+    displayName = data["displayName"];
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,11 +40,15 @@ class Home extends StatelessWidget {
                   children: [
                     Styles.regular("Welcome Back,",
                         color: AppColors.black, fontSize: 14.sp),
-                    Styles.semiBold("David Muritala",
+                    // Styles.semiBold("David Muritala",
+                    Styles.semiBold(displayName ?? "",
                         color: AppColors.black, fontSize: 18.sp),
                   ],
                 ),
-                SvgPicture.asset(SvgAssets.bell),
+                InkWell(
+                    onTap: () =>
+                        Navigator.pushNamed(context!, RoutePaths.notification),
+                    child: SvgPicture.asset(SvgAssets.bell)),
               ],
             ),
           ),

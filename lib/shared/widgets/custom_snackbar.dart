@@ -28,7 +28,9 @@ snackBar({
             width: deviceWidth(context) * 0.9,
             height: height,
             decoration: BoxDecoration(
-                color: isError == true ? AppColors.red : AppColors.primaryColor,
+                color: isError == true
+                    ? AppColors.red
+                    : AppColors.successGreenColor,
                 borderRadius: BorderRadius.circular(4.r)),
             child: Column(
               mainAxisSize: MainAxisSize.min,
