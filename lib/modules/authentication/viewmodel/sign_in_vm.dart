@@ -1,4 +1,5 @@
 import 'package:medilearnpro/core/base/base_viewmodel.dart';
+import 'package:medilearnpro/core/base/bottom_nav_model.dart';
 import 'package:medilearnpro/core/service-injector/service_injector.dart';
 import 'package:medilearnpro/core/services/authentication_service.dart';
 import 'package:medilearnpro/router/route_paths.dart';
@@ -39,6 +40,8 @@ class SignInViewModel extends BaseViewModel {
       if (isPassed) {
         snackBar(context: context!, message: message!, isError: false);
         // Navigator.pushNamed(context!, RoutePaths.signIn);
+        Provider.of<BottomNavModel>(context!, listen: false)
+            .updateIndex(0, context);
         Navigator.pushNamed(context!, RoutePaths.bottomNav);
       } else {
         snackBar(context: context!, message: message!, isError: true);

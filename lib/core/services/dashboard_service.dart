@@ -2,6 +2,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:medilearnpro/shared/models/home/feeds_model.dart';
 
 import '../../shared/models/api_model.dart';
 import '../service-injector/service_injector.dart';
@@ -17,15 +18,15 @@ class DashboardService {
   StorageService storageService;
   StoreService storeService;
 
-  Future<ApiResponse> dataOwnerDashboardStatisticsService(
-      Map<String, String> params,
+  Future<ApiResponse<FeedModel>> fetchPost(Map<String, String> params,
       {required BuildContext context}) {
-    return si.apiService!.getApi(
-      'Request/GetDataOwnerDashBoardStatistics',
+    return si.apiService!.getApiExternal<FeedModel>(
+      'topicsearch.json',
       params: params,
       context: context,
       transform: (dynamic res) {
-        return res;
+        debugPrint('Body2: $res');
+        return FeedModel.fromJson(res);
       },
     );
   }

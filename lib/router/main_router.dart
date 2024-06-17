@@ -4,7 +4,6 @@ import 'package:medilearnpro/modules/authentication/reset_password.dart';
 import 'package:medilearnpro/modules/authentication/setup_account.dart';
 import 'package:medilearnpro/modules/authentication/sign_in.dart';
 import 'package:medilearnpro/modules/home/notification.dart';
-import 'package:medilearnpro/modules/home/published.dart';
 import 'package:medilearnpro/modules/splash/splash_options.dart';
 import 'package:medilearnpro/modules/splash/splash_screen.dart';
 
@@ -28,8 +27,8 @@ class MainRouter {
         return MaterialPageRoute(builder: (_) => ResetPassword());
       case RoutePaths.bottomNav:
         return MaterialPageRoute(builder: (_) => const BottomNav());
-      case RoutePaths.published:
-        return MaterialPageRoute(builder: (_) => const Published());
+      // case RoutePaths.published:
+      //   return MaterialPageRoute(builder: (_) => const Published());
       case RoutePaths.notification:
         return MaterialPageRoute(builder: (_) => const MediNotification());
       // case RoutePaths.setupNewPin:

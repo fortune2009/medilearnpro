@@ -348,6 +348,246 @@ class ApiService {
     return apiResponse;
   }
 
+  Future<ApiResponse<T>> getApiExternal<T>(
+    String url, {
+    T Function(dynamic)? transform,
+    bool skipStatusCheck = false,
+    bool? useToken,
+    BuildContext? context,
+    Map<String, String>? customHeaders,
+    Map<String, String>? params,
+  }) async {
+    transform ??= (dynamic r) => r.body as T;
+
+    final ApiResponse<T> apiResponse = ApiResponse<T>();
+
+    try {
+      final Uri uri =
+          Uri.https(AppConfig.apiDomain2(), AppConfig.apiPath2(url), params);
+      // final Uri uri = AppConfig.apiProtocol.startsWith('https')
+      //     ? Uri.https(AppConfig.apiDomain(), AppConfig.apiPath(url), params)
+      //     : Uri.http(AppConfig.apiDomain(), AppConfig.apiPath(url), params);
+
+      Map<String, String> headers;
+
+      if (useToken == true) {
+        headers = await httpHeaders();
+      } else {
+        headers = {
+          HttpHeaders.acceptHeader: 'application/json',
+          HttpHeaders.contentTypeHeader: 'application/json; charset=UTF-8',
+        };
+      }
+
+      debugPrint('Body2: $uri');
+
+      final http.Response res = await http.get(uri, headers: headers);
+
+      debugPrint('Body2: $uri');
+      debugPrint('Body2: ${res.body}');
+      final dynamic data = json.decode(res.body);
+
+      if (res.statusCode == 200 || res.statusCode == 201) {
+        if (data["hasErrors"] == true) {
+          debugPrint('Body2: ${res.body}');
+          apiResponse.error = true;
+          apiResponse.code = data["code"];
+          String msg = "";
+
+          if (data["errors"] is List) {
+            for (int i = 0; i < data["errors"].length; i++) {
+              msg += data["errors"][i].toString() + "\n";
+            }
+          } else {
+            msg = data["errors"];
+          }
+          apiResponse.message = msg;
+          apiResponse.code = data['code'];
+
+          return apiResponse;
+        } else if (data["hasErrors"] == false && data["payload"] != null) {
+          debugPrint('Body3: ${res.body}');
+          apiResponse.error = false;
+          apiResponse.code = data["code"];
+          if (data["payload"] is String) {
+            apiResponse.data = data["payload"];
+            apiResponse.message = (data['payload'] ?? '').toString();
+          } else {
+            apiResponse.data = transform(data);
+            apiResponse.message = (data['description'] ?? '').toString();
+          }
+
+          return apiResponse;
+        } else {
+          debugPrint('Body4: ${res.body}');
+          apiResponse.error = false;
+          apiResponse.data = transform(data);
+          apiResponse.code = data["code"];
+          apiResponse.message =
+              (data['description'] ?? 'Something went wrong').toString();
+          return apiResponse;
+        }
+      } else if (int.parse(res.statusCode.toString()[0]) == 4) {
+        apiResponse.code = data["code"];
+        showCustomDialog(
+            context: context!,
+            message: 'Your session has expired',
+            lottie: LottieAssets.cancel,
+            callback: () {
+              Navigator.pushReplacementNamed(context, RoutePaths.signIn);
+            });
+        apiResponse.error = false;
+        apiResponse.code = data['code'] ?? -1;
+        apiResponse.message =
+            (data['description'] ?? 'Something went wrong').toString();
+        return apiResponse;
+      } else {
+        apiResponse.error = true;
+        apiResponse.code = data["code"];
+        if (data['payload'] != null) {
+          apiResponse.data = transform(data);
+          apiResponse.message =
+              (data['description'] ?? 'Error encountered').toString();
+        }
+        if (data['description'] != null) {
+          apiResponse.message =
+              (data['description'] ?? 'Error encountered').toString();
+        }
+      }
+    } on SocketException {
+      apiResponse.error = true;
+      debugPrint('Body5: ');
+      apiResponse.code = AuthConstants.failedCode;
+      apiResponse.message = ("No connection 🥲").toString();
+    } catch (e) {
+      debugPrint('Body6: $e');
+      apiResponse.error = true;
+      apiResponse.code = AuthConstants.failedCode;
+    }
+
+    return apiResponse;
+  }
+
+  Future<ApiResponse<T>> getApiYoutube<T>(
+    String url, {
+    T Function(dynamic)? transform,
+    bool skipStatusCheck = false,
+    bool? useToken,
+    BuildContext? context,
+    Map<String, String>? customHeaders,
+    Map<String, String>? params,
+  }) async {
+    transform ??= (dynamic r) => r.body as T;
+
+    final ApiResponse<T> apiResponse = ApiResponse<T>();
+
+    try {
+      final Uri uri =
+          Uri.https(AppConfig.apiDomain3(), AppConfig.apiPath3(url), params);
+      // final Uri uri = AppConfig.apiProtocol.startsWith('https')
+      //     ? Uri.https(AppConfig.apiDomain(), AppConfig.apiPath(url), params)
+      //     : Uri.http(AppConfig.apiDomain(), AppConfig.apiPath(url), params);
+
+      Map<String, String> headers;
+
+      if (useToken == true) {
+        headers = await httpHeaders();
+      } else {
+        headers = {
+          HttpHeaders.acceptHeader: 'application/json',
+          HttpHeaders.contentTypeHeader: 'application/json; charset=UTF-8',
+        };
+      }
+
+      debugPrint('Body2: $uri');
+
+      final http.Response res = await http.get(uri, headers: headers);
+
+      debugPrint('Body2: $uri');
+      debugPrint('Body2: ${res.body}');
+      final dynamic data = json.decode(res.body);
+
+      if (res.statusCode == 200 || res.statusCode == 201) {
+        if (data["hasErrors"] == true) {
+          debugPrint('Body2: ${res.body}');
+          apiResponse.error = true;
+          apiResponse.code = data["code"];
+          String msg = "";
+
+          if (data["errors"] is List) {
+            for (int i = 0; i < data["errors"].length; i++) {
+              msg += data["errors"][i].toString() + "\n";
+            }
+          } else {
+            msg = data["errors"];
+          }
+          apiResponse.message = msg;
+          apiResponse.code = data['code'];
+
+          return apiResponse;
+        } else if (data["hasErrors"] == false && data["payload"] != null) {
+          debugPrint('Body3: ${res.body}');
+          apiResponse.error = false;
+          apiResponse.code = data["code"];
+          if (data["payload"] is String) {
+            apiResponse.data = data["payload"];
+            apiResponse.message = (data['payload'] ?? '').toString();
+          } else {
+            apiResponse.data = transform(data);
+            apiResponse.message = (data['description'] ?? '').toString();
+          }
+
+          return apiResponse;
+        } else {
+          debugPrint('Body4: ${res.body}');
+          apiResponse.error = false;
+          apiResponse.data = transform(data);
+          apiResponse.code = data["code"];
+          apiResponse.message =
+              (data['description'] ?? 'Something went wrong').toString();
+          return apiResponse;
+        }
+      } else if (int.parse(res.statusCode.toString()[0]) == 4) {
+        apiResponse.code = data["code"];
+        showCustomDialog(
+            context: context!,
+            message: 'Your session has expired',
+            lottie: LottieAssets.cancel,
+            callback: () {
+              Navigator.pushReplacementNamed(context, RoutePaths.signIn);
+            });
+        apiResponse.error = false;
+        apiResponse.code = data['code'] ?? -1;
+        apiResponse.message =
+            (data['description'] ?? 'Something went wrong').toString();
+        return apiResponse;
+      } else {
+        apiResponse.error = true;
+        apiResponse.code = data["code"];
+        if (data['payload'] != null) {
+          apiResponse.data = transform(data);
+          apiResponse.message =
+              (data['description'] ?? 'Error encountered').toString();
+        }
+        if (data['description'] != null) {
+          apiResponse.message =
+              (data['description'] ?? 'Error encountered').toString();
+        }
+      }
+    } on SocketException {
+      apiResponse.error = true;
+      debugPrint('Body5: ');
+      apiResponse.code = AuthConstants.failedCode;
+      apiResponse.message = ("No connection 🥲").toString();
+    } catch (e) {
+      debugPrint('Body6: $e');
+      apiResponse.error = true;
+      apiResponse.code = AuthConstants.failedCode;
+    }
+
+    return apiResponse;
+  }
+
   Future<ApiResponse<T>> getApiStreams<T>(
     String url, {
     T Function(dynamic)? transform,

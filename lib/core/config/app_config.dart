@@ -39,12 +39,31 @@ class AppConfig {
     return isAuth! ? customUrl : _devUrl;
   }
 
+  static String apiDomain2({bool? isAuth = false}) {
+    // AppConfig.isAuth = isAuth!;
+    return isAuth! ? customUrl : "health.gov";
+  }
+
+  static String apiDomain3({bool? isAuth = false}) {
+    // AppConfig.isAuth = isAuth!;
+    return isAuth! ? customUrl : "www.googleapis.com";
+  }
+
   // static String apiPath(String path) {
   //   return (path.startsWith('api/') ? path.substring(1) : path);
   // }
 
   static String apiPath(String path) {
     return '/v1/' + (path.startsWith('/') ? path.substring(1) : path);
+  }
+
+  static String apiPath2(String path) {
+    return '/myhealthfinder/api/v3/' +
+        (path.startsWith('/') ? path.substring(1) : path);
+  }
+
+  static String apiPath3(String path) {
+    return '/youtube/v3/' + (path.startsWith('/') ? path.substring(1) : path);
   }
 
   static String apiFullPath(String path) {
