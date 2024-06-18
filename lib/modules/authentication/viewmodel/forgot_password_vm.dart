@@ -13,9 +13,12 @@ class ForgotPasswordViewModel extends BaseViewModel {
   String? message;
   bool isPasswordVisible = false;
 
-  final emailController = TextEditingController(text: "Fortune@yopmail.com");
-  final oobCodeController = TextEditingController(text: "P@ss1234");
-  final newPasswordController = TextEditingController(text: "P@ss1234");
+  // final emailController = TextEditingController(text: "Fortune@yopmail.com");
+  // final oobCodeController = TextEditingController(text: "P@ss1234");
+  // final newPasswordController = TextEditingController(text: "P@ss1234");
+  final emailController = TextEditingController();
+  final oobCodeController = TextEditingController();
+  final newPasswordController = TextEditingController();
 
   ForgotPasswordViewModel({this.context, this.authenticationService});
 

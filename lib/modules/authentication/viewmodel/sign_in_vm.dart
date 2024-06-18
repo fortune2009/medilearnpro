@@ -13,8 +13,10 @@ class SignInViewModel extends BaseViewModel {
   final AuthenticationService? authenticationService;
   String? message;
 
-  final emailController = TextEditingController(text: "Fortune3@yopmail.com");
-  final passwordController = TextEditingController(text: "P@ss1234");
+  // final emailController = TextEditingController(text: "Fortune3@yopmail.com");
+  // final passwordController = TextEditingController(text: "P@ss1234");
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
   bool isPasswordVisible = false;
 
   SignInViewModel({this.context, this.authenticationService});

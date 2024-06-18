@@ -3,15 +3,30 @@ import 'package:medilearnpro/modules/authentication/viewmodel/sign_in_vm.dart';
 import 'package:medilearnpro/router/route_paths.dart';
 import 'package:medilearnpro/shared/widgets/all_package.dart';
 
-class SignIn extends StatelessWidget {
+class SignIn extends StatefulWidget {
   SignIn({Key? key}) : super(key: key);
+
+  @override
+  State<SignIn> createState() => _SignInState();
+}
+
+class _SignInState extends State<SignIn> {
   final formKey = GlobalKey<FormState>();
+  SignInViewModel? signInVM;
+
+  @override
+  void initState() {
+    super.initState();
+    signInVM = SignInViewModel(
+        context: context, authenticationService: si.authenticationService);
+  }
 
   @override
   Widget build(BuildContext context) {
     return BaseView<SignInViewModel>(
-      vmBuilder: (context) => SignInViewModel(
-          context: context, authenticationService: si.authenticationService),
+      vmBuilder: (context) => signInVM!,
+      // vmBuilder: (context) => SignInViewModel(
+      //     context: context, authenticationService: si.authenticationService),
       builder: _buildScreen,
     );
   }
