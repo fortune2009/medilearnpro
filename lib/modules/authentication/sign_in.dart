@@ -108,14 +108,14 @@ class _SignInState extends State<SignIn> {
               labelColor: AppColors.textDarkColor,
               textInputType: TextInputType.visiblePassword,
               hintText: "Enter Password",
-              // obscureText: !viewModel.isPasswordVisible,
+              obscureText: !viewModel.isPasswordVisible,
               suffixIcon: GestureDetector(
-                  // onTap: viewModel.setPasswordVisible,
+                  onTap: viewModel.setPasswordVisible,
                   child: Padding(
                 padding: EdgeInsets.all(15.r),
                 child: SvgPicture.asset(
-                  // viewModel.isPasswordVisible
-                  true ? SvgAssets.eye : SvgAssets.eyeSlash,
+                  viewModel.isPasswordVisible
+                   ? SvgAssets.eye : SvgAssets.eyeSlash,
                   width: 20.w,
                   height: 20.h,
                 ),
